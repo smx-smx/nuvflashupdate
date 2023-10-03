@@ -1,5 +1,5 @@
 /*
- * Copyright © 2010, Nuvoton Technology Corporation. All rights reserved.
+ * Copyright Â© 2010, Nuvoton Technology Corporation. All rights reserved.
  * Use is subject to license terms.
  */
 
@@ -87,116 +87,144 @@ long int hwrw_ioctl (struct file *filp,
 
 	case HWRW_IOC_MEM_MAP:
             mmio = ioremap(*(unsigned int *)Parms->p_1, Parms->p_2);        // map virtual to physical
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_MAP, mmio = %lx, P1 = %lx, P2 = %lx\n",
 		   (unsigned long)mmio,
                    *(unsigned long *)Parms->p_1,   // address
                    Parms->p_2                     // size
                    );
+#endif
 	    *(unsigned long *)(Parms->p_1) = (unsigned long)mmio;
 	    break;
 
 	case HWRW_IOC_MEM_UNMAP:
             iounmap((void *)Parms->p_1);        // un map virtual to physical
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_UNMAP, P1 = %x, P2 = %lx\n",
                    (unsigned int)Parms->p_1,   // address
                    Parms->p_2                     // size
                    );
+#endif
 	    break;
 
         case HWRW_IOC_MEM_READ_32:            
             *(unsigned long *)(Parms->p_2) = ioread32((void *)Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_READ_32 %lx = %x\n",
                    Parms->p_1,                    //Read address
                    *(unsigned int *)(Parms->p_2)  // result
-                   );            
+                   );
+#endif
             break;
         
         case HWRW_IOC_MEM_WRITE_32:            
             iowrite32(Parms->p_2, (void *)Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_WRITE_32 %lx = %lx\n",
                    Parms->p_1,                    //Write address
                    Parms->p_2                     // Data
                    );            
+#endif
             break;
 
         case HWRW_IOC_MEM_READ_16:
             *(unsigned short *)(Parms->p_2) = ioread16((void *)Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_READ_16 %lx = %x\n",
                    Parms->p_1,                      //Read address
                    *(unsigned short *)(Parms->p_2)  // result
                    );
+#endif
             break;
         
         case HWRW_IOC_MEM_WRITE_16:            
             iowrite16((unsigned short)Parms->p_2, (void *)Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_WRITE_16 %lx = %x\n",
                    Parms->p_1,                    //Write address
                    (unsigned short)Parms->p_2     // Data
                    );
+#endif
             break;
 
         case HWRW_IOC_MEM_READ_8:            
             *(unsigned char *)(Parms->p_2) = ioread8((void *)Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_READ_8 %lx = %x\n",
                    Parms->p_1,                      //Read address
                    *(unsigned char *)(Parms->p_2)  // result
                    );
+#endif
             break;
         
         case HWRW_IOC_MEM_WRITE_8:            
             iowrite8((unsigned char)Parms->p_2, (void *)Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_MEM_WRITE_8 %lx = %x\n",
                    Parms->p_1,                   //Write address
                    (unsigned char)Parms->p_2     // Data
                    );
+#endif
             break;
 
         case HWRW_IOC_IO_READ_32:
             *(unsigned long *)(Parms->p_2) = inl(Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_IO_READ_32 %lx = %x\n",
                    Parms->p_1,                      //Read address
                    *(unsigned int *)(Parms->p_2)    // result
-                   );      
+                   );
+#endif
             break;
 
         case HWRW_IOC_IO_WRITE_32:
             outl((unsigned long)Parms->p_2, Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_IO_WRITE_32 %lx = %x\n",
                    Parms->p_1,                    //Write address
                    (unsigned int)Parms->p_2      // Data
-                   );     
+                   );
+#endif
             break;
 
         case HWRW_IOC_IO_READ_16:
             *(unsigned short *)(Parms->p_2) = inw(Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_IO_READ_16 %lx = %x\n",
                    Parms->p_1,                      //Read address
                    *(unsigned short *)(Parms->p_2)  // result
-                   );      
+                   );
+#endif
             break;
 
         case HWRW_IOC_IO_WRITE_16:
             outw((unsigned short)Parms->p_2, Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_IO_WRITE_16 %lx = %x\n",
                    Parms->p_1,                    //Write address
                    (unsigned short)Parms->p_2     // Data
-                   );     
+                   );
+#endif
             break;
 
         case HWRW_IOC_IO_READ_8:
             *(unsigned char *)(Parms->p_2) = inb(Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_IO_READ_8 %lx = %x\n",
                    Parms->p_1,                      //Read address
                    *(unsigned char *)(Parms->p_2)  // result
-                   );      
+                   );
+#endif
             break;
 
         case HWRW_IOC_IO_WRITE_8:
             outb((unsigned char)Parms->p_2, Parms->p_1);
+#ifdef DEBUG
             printk(KERN_INFO "hwReWr: HWRW_IOC_IO_WRITE_8 %lx = %x\n",
                    Parms->p_1,                   //Write address
                    (unsigned char)Parms->p_2     // Data
-                   );     
+                   );
+#endif
             break;
 
     }
