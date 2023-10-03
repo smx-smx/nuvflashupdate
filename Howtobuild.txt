@@ -1,0 +1,30 @@
+
+Flash Update Tool
+==================
+
+
+1. Application Build
+=====================
+
+Run from linux prompt -
+
+  make	
+    
+
+2. Output
+==========
+
+  ./flupdate
+            
+
+3. Clean
+=========
+
+Run from linux prompt -
+
+  make clean
+
+    
+    
+
+

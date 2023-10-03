@@ -1,0 +1,157 @@
+/*
+ * Copyright © 2010, Nuvoton Technology Corporation. All rights reserved.
+ * Use is subject to license terms.
+ */
+
+/*
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions 
+ * are met:
+ * 
+ * Redistributions of source code must retain the above copyright 
+ * notice, this list of conditions and the following disclaimer.
+ * 
+ * Redistributions in binary form must reproduce the above copyright 
+ * notice, this list of conditions and the following disclaimer in the 
+ * documentation and/or other materials provided with the distribution.
+ * 
+ * Neither the name of Nuvoton Technology Corporation. or the names of 
+ * contributors or licensors may be used to endorse or promote products derived 
+ * from this software without specific prior written permission.
+ * 
+ * This software is provided "AS IS," without a warranty of any kind. 
+ * ALL EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, 
+ * INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE HEREBY EXCLUDED.
+ * NUVOTON TECHNOLOGY CORPORATION. ("NUVOTON") AND ITS LICENSORS SHALL NOT BE LIABLE
+ * FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING
+ * OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.  IN NO EVENT WILL
+ * SUN OR ITS LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA,
+ * OR FOR DIRECT, INDIRECT, SPECIAL, CONSEQUENTIAL, INCIDENTAL OR
+ * PUNITIVE DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF
+ * LIABILITY, ARISING OUT OF THE USE OF OR INABILITY TO USE THIS SOFTWARE,
+ * EVEN IF SUN HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+ */
+
+
+/*--------------------------------------------------------------------------------------*/
+/*                                                                                      */
+/*                                      INCLUDES                                        */
+/*                                                                                      */
+/*--------------------------------------------------------------------------------------*/
+
+#include "FlashAccess.h" 
+
+
+/*--------------------------------------------------------------------------------------*/
+/*                                                                                      */
+/*                             LOCAL VARRIABLE DECLARATION                              */
+/*                                                                                      */
+/*--------------------------------------------------------------------------------------*/
+
+
+static FLASH_ACCESS_TYPE m_FlashAccessType = PROGRAM_THROUGH_MEMORY;
+
+
+/*--------------------------------------------------------------------------------------*/
+/*                                                                                      */
+/*                                FUNCTION DECLERATION                                  */
+/*                                                                                      */
+/*--------------------------------------------------------------------------------------*/
+
+void SetFlashAccess(FLASH_ACCESS_TYPE p_accessType)
+{
+    m_FlashAccessType = p_accessType;
+}
+
+FLASH_ACCESS_TYPE GetFlashAccessType()
+{
+    return m_FlashAccessType;
+}
+
+unsigned char Pc2FlashReadB (unsigned long Address)
+{
+    if (PROGRAM_THROUGH_IO == m_FlashAccessType)
+    {
+        return PcIoReadB(Address);
+    }
+    else
+    {
+        return PcMemReadB(Address);
+    }    
+}
+
+unsigned short Pc2FlashReadW (unsigned long Address)
+{
+    if (PROGRAM_THROUGH_IO == m_FlashAccessType)
+    {
+        return PcIoReadW(Address);
+    }
+    else
+    {
+        return PcMemReadW(Address);
+    }    
+}
+
+unsigned long Pc2FlashReadD (unsigned long Address)    
+{
+    if (PROGRAM_THROUGH_IO == m_FlashAccessType)
+    {
+        return PcIoReadD(Address);
+    }
+    else
+    {
+        return PcMemReadD(Address);
+    }    
+}
+
+void Pc2FlashWriteB(unsigned long Address, unsigned char Data)
+{
+    if (PROGRAM_THROUGH_IO == m_FlashAccessType)
+    {
+        PcIoWriteB(Address, Data);
+    }
+    else
+    {
+        PcMemWriteB(Address, Data);
+    }    
+}
+
+void Pc2FlashWriteW(unsigned long Address, unsigned short Data)
+{
+    if (PROGRAM_THROUGH_IO == m_FlashAccessType)
+    {
+        PcIoWriteW(Address, Data);
+    }
+    else
+    {
+        PcMemWriteW(Address, Data) ;
+    }    
+}
+
+void Pc2FlashWriteD(unsigned long Address, unsigned long Data)
+{
+    if (PROGRAM_THROUGH_IO == m_FlashAccessType)
+    {
+        PcIoWriteD(Address, Data);
+    }
+    else
+    {
+        PcMemWriteD(Address, Data);
+    }    
+}
+
+int  Pc2FlashWrite (unsigned long Address, unsigned long NumOfBytes, int UnitSize, const void* Data)
+{
+    if (PROGRAM_THROUGH_IO == m_FlashAccessType)
+    {
+        return PcIoWrite(Address, NumOfBytes, UnitSize, Data);
+    }
+    else
+    {
+        return PcMemWrite(Address, NumOfBytes, UnitSize, Data);
+    }    
+}
+
+
+
