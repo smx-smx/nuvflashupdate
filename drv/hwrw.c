@@ -73,7 +73,7 @@ MODULE_LICENSE("GPL");
 /*                           Driver functions                                      */
 /* ------------------------------------------------------------------------------- */
 
-int hwrw_ioctl (struct inode *inode, struct file *filp,
+long int hwrw_ioctl (struct file *filp,
                  unsigned int cmd, unsigned long arg)
 {
 
@@ -206,7 +206,7 @@ int hwrw_ioctl (struct inode *inode, struct file *filp,
 
 const struct file_operations hwrw_fops = {
     .owner  = THIS_MODULE,
-    .ioctl   = hwrw_ioctl,
+    .unlocked_ioctl   = hwrw_ioctl,
 };
 
 static struct miscdevice hwrw_dev = {
