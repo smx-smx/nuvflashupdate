@@ -1,5 +1,5 @@
 /*
- * Copyright © 2010, Nuvoton Technology Corporation. All rights reserved.
+ * Copyright Â© 2010, Nuvoton Technology Corporation. All rights reserved.
  * Use is subject to license terms.
  */
 
@@ -44,7 +44,7 @@
 #define COMMON_SHOW_README_WHEN_NO_PARAMETERS
 
 #define COMMON_WIN_DEFAULT_EXIT_TYPE_BOOT_BLOCK
-#define COMMON_DOS_DEFAULT_EXIT_TYPE_BOOT_BLOCK
+//#define COMMON_DOS_DEFAULT_EXIT_TYPE_BOOT_BLOCK
 #define COMMON_CMD_FILE
 
 #define COMMON_FLAG_NOREBOOT
