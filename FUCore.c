@@ -1,5 +1,5 @@
 /*
- * Copyright © 2010, Nuvoton Technology Corporation. All rights reserved.
+ * Copyright ï¿½ 2010, Nuvoton Technology Corporation. All rights reserved.
  * Use is subject to license terms.
  */
 
